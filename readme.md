@@ -23,6 +23,7 @@ mvn clean install
 7. Unzip all archives to a directory of your choice
 
 Read more about the SRTM data [at JPL](https://www2.jpl.nasa.gov/srtm/cbanddataproducts.html).
+See the tiles of the SRTM data [here](https://www2.jpl.nasa.gov/srtm/images/SRTM_2-24-2016.gif).
 
 # Run
 

@@ -30,7 +30,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>hu.awm.hgt.Application</mainClass>
+							<mainClass>hu.awm.srtm.cli.CliApplication</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Created-By>David Csakvari</Created-By>
