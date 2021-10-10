@@ -6,7 +6,7 @@ import java.nio.ShortBuffer;
  * Height data for a one by one degree latitude and longitude tile in high resolution (E.g. N44E016),
  * read from a HGT file.
  *
- * The title is divided to 3600 rows and 3600 columns. The real-world size of such pixel depends on its latitude and longitude.
+ * The tile is divided to 3600 rows and 3600 columns. The real-world size of such pixel depends on its latitude and longitude.
  * - Degrees of latitude are parallel, so the distance between each degree is mostly constant, 1 degree ~= 111km,
  *   so the height of each pixel is roughly 30.8 m.
  * - Longitude varies based on the actual location. It is also ~= 111km at the equador, but shrinks to 0 as it reaches the poles.
