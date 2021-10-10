@@ -9,7 +9,7 @@ import java.nio.ShortBuffer;
  * The tile is divided to 3600 rows and 3600 columns. The real-world size of such pixel depends on its latitude and longitude.
  * - Degrees of latitude are parallel, so the distance between each degree is mostly constant, 1 degree ~= 111km,
  *   so the height of each pixel is roughly 30.8 m.
- * - Longitude varies based on the actual location. It is also ~= 111km at the equador, but shrinks to 0 as it reaches the poles.
+ * - Longitude varies based on the actual location. It is also ~= 111km at the equator, but shrinks to 0 as it reaches the poles.
  *
  * @see https://lpdaac.usgs.gov/documents/179/SRTM_User_Guide_V3.pdf
  */
