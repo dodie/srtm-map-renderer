@@ -15,6 +15,8 @@ import java.nio.ShortBuffer;
  */
 public class Tile {
 
+	public static final int PIXEL_SIZE_IN_M = 30; // TODO: as an approximation, we just currently use 30m regardless of the actual location.
+
 	public static final int RESOLUTION = 3601;
 
 	private static final int MAGIC_DATA_VOID = -32768;

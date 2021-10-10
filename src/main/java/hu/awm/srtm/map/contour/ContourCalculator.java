@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.awm.srtm.data.hgt.Position;
+import hu.awm.srtm.data.hgt.Tile;
 import hu.awm.srtm.data.hgt.TileMap;
 
 public class ContourCalculator {
-
-	static final int STEP_SIZE_IN_M = 30;
-	// TODO: pass in as an argument. In HU it's ~30 when we look north, and ~22 when we look east.
 
 	static final int EYE_HEIGHT_FROM_GROUND_IN_M = 5;
 
@@ -30,7 +28,7 @@ public class ContourCalculator {
 
 		double topDeg = 0D;
 		for (int i = 1; i < heightData.length; i++) {
-			int targetDistance = STEP_SIZE_IN_M * i;
+			int targetDistance = Tile.PIXEL_SIZE_IN_M * i;
 			double visibilityAngle = calculateVisibilityAngle(eyeHeight, heightData[i], targetDistance);
 
 			if (topDeg < visibilityAngle) {
@@ -50,7 +48,7 @@ public class ContourCalculator {
 		double topDeg = 0D;
 
 		for (int i = 1; i < heightData.length; i++) {
-			int targetDistance = STEP_SIZE_IN_M * i;
+			int targetDistance = Tile.PIXEL_SIZE_IN_M * i;
 			double visibilityAngle = calculateVisibilityAngle(eyeHeight, heightData[i], targetDistance);
 
 			if (topDeg < visibilityAngle) {
@@ -85,7 +83,7 @@ public class ContourCalculator {
 
 		double eyeHeight = heightData[0];
 		for (int i = 0; i < heightData.length; i++) {
-			int targetDistance = STEP_SIZE_IN_M * i;
+			int targetDistance = Tile.PIXEL_SIZE_IN_M * i;
 			double targetHeight = heightData[i];
 			double targetHiddenHeight = calculateTargetHiddenHeight(eyeHeight, targetDistance);
 			double targetVisibleHeight = targetHeight - targetHiddenHeight;
