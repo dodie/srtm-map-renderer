@@ -1,4 +1,4 @@
-# HGT Map Renderer
+# SRTM Map Renderer
 
 Render relief map and contour lines generator based on data from the [NASA Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/cbanddataproducts.html).
 
