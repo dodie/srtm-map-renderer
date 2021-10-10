@@ -2,12 +2,6 @@
 
 Render relief map and contour lines generator based on data from the [NASA Shuttle Radar Topography Mission (SRTM)](https://www2.jpl.nasa.gov/srtm/cbanddataproducts.html).
 
-# Build
-
-```
-./mvnw clean install
-```
-
 # Download the HGT files
 
 1. Login on https://search.earthdata.nasa.gov/. Create an Earth Data account if you don't already have one.
@@ -41,6 +35,12 @@ N48E022.hgt
 ```
 
 See all tiles of the SRTM data [here](https://www2.jpl.nasa.gov/srtm/images/SRTM_2-24-2016.gif).
+
+# Build
+
+```
+./mvnw clean install
+```
 
 # Run
 
