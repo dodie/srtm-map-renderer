@@ -8,7 +8,7 @@ See the tiles of the SRTM data [here](https://www2.jpl.nasa.gov/srtm/images/SRTM
 # Build
 
 ```
-mvn clean install
+./mvnw clean install
 ```
 
 # Download the HGT files
