@@ -2,7 +2,7 @@
 
 Render relief maps and contour lines based on data from the NASA Shuttle Radar Topography Mission (SRTM).
 
-Read more about the SRTM data [at JPL](https://www2.jpl.nasa.gov/srtm/cbanddataproducts.html).
+[Read more about the SRTM data](https://www2.jpl.nasa.gov/srtm/cbanddataproducts.html).
 
 # Build
 
