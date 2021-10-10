@@ -3,7 +3,6 @@
 Render relief maps and contour lines based on data from the NASA Shuttle Radar Topography Mission (SRTM).
 
 Read more about the SRTM data [at JPL](https://www2.jpl.nasa.gov/srtm/cbanddataproducts.html).
-See the tiles of the SRTM data [here](https://www2.jpl.nasa.gov/srtm/images/SRTM_2-24-2016.gif).
 
 # Build
 
@@ -42,6 +41,8 @@ N48E020.hgt
 N48E021.hgt
 N48E022.hgt
 ```
+
+See all tiles of the SRTM data [here](https://www2.jpl.nasa.gov/srtm/images/SRTM_2-24-2016.gif).
 
 # Run
 
