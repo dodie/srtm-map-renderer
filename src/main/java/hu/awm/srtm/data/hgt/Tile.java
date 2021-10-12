@@ -27,6 +27,9 @@ public class Tile {
 
 	private final int lat;
 
+	private boolean isMaxElevationCalculated = false;
+	private double maxElevation = 0;
+
 	Tile(int lat, int lon, ShortBuffer data) {
 		this.lat = lat;
 		this.lon = lon;
@@ -57,6 +60,21 @@ public class Tile {
 		else {
 			return elevation;
 		}
+	}
+
+	public double getMaxElevation() {
+		if (!isMaxElevationCalculated) {
+			isMaxElevationCalculated = true;
+			for (int x = 0; x < RESOLUTION; x++) {
+				for (int y = 0; y < RESOLUTION; y++) {
+					final double elevation = elevation(x, y);
+					if (elevation > maxElevation) {
+						maxElevation = elevation;
+					}
+				}
+			}
+		}
+		return maxElevation;
 	}
 
 	private static String createExceptionMessage(int row, int col) {
