@@ -50,7 +50,7 @@ public class TileReader {
 	}
 
 	private String hgtFilePath(int lat, int lon) {
-		return baseDir + "N" + lat + "E0" + lon + FILE_EXT;
+		return String.format("%sN%02dE%03d%s", baseDir, lat, lon, FILE_EXT);
 	}
 
 }
