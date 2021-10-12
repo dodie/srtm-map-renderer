@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import hu.awm.srtm.data.hgt.Position;
 import hu.awm.srtm.data.hgt.Tile;
 import hu.awm.srtm.data.hgt.TileMap;
+import hu.awm.srtm.helper.Gradient;
+import hu.awm.srtm.helper.SimpleGradient;
 
 public class ReliefMapRenderer {
 
@@ -18,7 +20,19 @@ public class ReliefMapRenderer {
 
 		BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
 
-		double maxElevation = 300d;
+		double maxElevation = 0;
+
+		for (int tileYNum = 0; tileYNum < resy; tileYNum++) {
+			for (int tileXNum = 0; tileXNum < resx; tileXNum++) {
+				Tile tile = tiles.get(tileYNum, tileXNum);
+
+				if (tile.getMaxElevation() > maxElevation) {
+					maxElevation = tile.getMaxElevation();
+				}
+			}
+		}
+
+		Gradient gradient = new SimpleGradient(new Color(30,0, 0),  new Color(170, 240, 170));
 
 		for (int tileYNum = 0; tileYNum < resy; tileYNum++) {
 			for (int tileXNum = 0; tileXNum < resx; tileXNum++) {
@@ -28,25 +42,7 @@ public class ReliefMapRenderer {
 				for (int x = 0; x < Tile.RESOLUTION; x++) {
 					for (int y = 0; y < Tile.RESOLUTION; y++) {
 
-						Color color;
-						if (data[x][y] < 255) {
-							color = new Color(0, data[x][y], 0);
-						}
-						else if (255 <= data[x][y] && data[x][y] < 510) {
-							color = new Color(data[x][y] - 255, 255, 0);
-						}
-						else if (510 <= data[x][y] && data[x][y] < 765) {
-							color = new Color(255, 255, data[x][y] - 510);
-						}
-						else {
-							color = new Color(255, 255, 255);
-						}
-
-						if (highlight != null && highlight.gridLat == tile.lat()
-								&& highlight.gridLon == tile.lon()
-								&& Math.abs(y - highlight.col) < 100 && Math.abs(x - highlight.row) < 100) {
-							color = Color.RED;
-						}
+						Color color = gradient.heightToColor(data[x][y]);
 
 						img.setRGB(y + Tile.RESOLUTION * tileXNum, Tile.RESOLUTION - x - 1 + Tile.RESOLUTION * tileYNum,
 								color.getRGB());
