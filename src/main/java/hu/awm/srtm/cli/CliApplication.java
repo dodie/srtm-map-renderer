@@ -1,7 +1,3 @@
-/*
- * Author : AdNovum Informatik AG
- */
-
 package hu.awm.srtm.cli;
 
 import java.util.List;
