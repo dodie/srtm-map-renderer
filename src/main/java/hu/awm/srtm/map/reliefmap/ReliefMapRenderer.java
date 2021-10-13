@@ -7,7 +7,7 @@ import hu.awm.srtm.data.hgt.Position;
 import hu.awm.srtm.data.hgt.Tile;
 import hu.awm.srtm.data.hgt.TileMap;
 import hu.awm.srtm.helper.Gradient;
-import hu.awm.srtm.helper.SimpleGradient;
+import hu.awm.srtm.helper.LinearGradient;
 
 public class ReliefMapRenderer {
 
@@ -32,12 +32,17 @@ public class ReliefMapRenderer {
 			}
 		}
 
-		Gradient gradient = new SimpleGradient(new Color(30,0, 0),  new Color(170, 240, 170));
+		maxElevation *= 1.2; // Can be changed to any number greater than 1, to tweak the scale
+
+		Gradient gradient = new LinearGradient(new double[] { 0.0, 0.1, 1.0 },
+				new Color(148, 139, 70),
+				new Color(34, 79, 34),
+				new Color(117, 169, 68));
 
 		for (int tileYNum = 0; tileYNum < resy; tileYNum++) {
 			for (int tileXNum = 0; tileXNum < resx; tileXNum++) {
 				Tile tile = tiles.get(tileYNum, tileXNum);
-				final int[][] data = scale(tile, maxElevation, 255);
+				final double[][] data = scale(tile, maxElevation, 1.0);
 
 				for (int x = 0; x < Tile.RESOLUTION; x++) {
 					for (int y = 0; y < Tile.RESOLUTION; y++) {
@@ -54,12 +59,12 @@ public class ReliefMapRenderer {
 		return img;
 	}
 
-	private static int[][] scale(Tile tile, double unitInput, int unitOutput) {
+	private static double[][] scale(Tile tile, double unitInput, double unitOutput) {
 		int size = Tile.RESOLUTION;
-		final int[][] data = new int[size][size];
+		final double[][] data = new double[size][size];
 		for (int lat = 0; lat < size; lat = lat + 1) {
 			for (int lon = 0; lon < size; lon = lon + 1) {
-				data[lat][lon] = (int) ((tile.elevation(lat, lon) / unitInput) * unitOutput);
+				data[lat][lon] = (tile.elevation(lat, lon) / unitInput) * unitOutput;
 			}
 		}
 
