@@ -1,40 +1,40 @@
 package hu.awm.srtm.tools.cansee;
 
 public class Sight {
-    private Xyz startCoordinate;
-    private Xyz endCoordinate;
-    private Xyz looseSightCoordinate;
+    private Vector3D startCoordinate;
+    private Vector3D endCoordinate;
+    private Vector3D looseSightCoordinate;
 
     public Sight() {
     }
 
-    public Sight(Xyz startCoordinate, Xyz endCoordinate, Xyz looseSightCoordinate) {
+    public Sight(Vector3D startCoordinate, Vector3D endCoordinate, Vector3D looseSightCoordinate) {
         this.startCoordinate = startCoordinate;
         this.endCoordinate = endCoordinate;
         this.looseSightCoordinate = looseSightCoordinate;
     }
 
-    public Xyz getStartCoordinate() {
+    public Vector3D getStartCoordinate() {
         return startCoordinate;
     }
 
-    public void setStartCoordinate(Xyz startCoordinate) {
+    public void setStartCoordinate(Vector3D startCoordinate) {
         this.startCoordinate = startCoordinate;
     }
 
-    public Xyz getEndCoordinate() {
+    public Vector3D getEndCoordinate() {
         return endCoordinate;
     }
 
-    public void setEndCoordinate(Xyz endCoordinate) {
+    public void setEndCoordinate(Vector3D endCoordinate) {
         this.endCoordinate = endCoordinate;
     }
 
-    public Xyz getLooseSightCoordinate() {
+    public Vector3D getLooseSightCoordinate() {
         return looseSightCoordinate;
     }
 
-    public void setLooseSightCoordinate(Xyz looseSightCoordinate) {
+    public void setLooseSightCoordinate(Vector3D looseSightCoordinate) {
         this.looseSightCoordinate = looseSightCoordinate;
     }
 

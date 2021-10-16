@@ -77,6 +77,20 @@ public class Tile {
 		return maxElevation;
 	}
 
+	public double elevationByExactCoordinates(final double lat, final double lon) {
+		if (lat < this.lat || lat >= this.lat + 1 || lon < this.lon || lon >= this.lon + 1) {
+			throw new IllegalArgumentException("{lat: " + lat + " lon: " + lon + "} is not in tile of {lat: "
+					+ this.lat + " lon: " + this.lon + "}");
+		}
+		double latDelta = lat - this.lat;
+		double lonDelta = lon - this.lon;
+
+		int row = (int)(RESOLUTION * latDelta);
+		int col = (int)(RESOLUTION * lonDelta);
+
+		return elevation(row, col);
+	}
+
 	private static String createExceptionMessage(int row, int col) {
 		return "Query: " + row + "/" + col;
 	}

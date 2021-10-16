@@ -107,7 +107,7 @@ public class ContourCalculator {
 	}
 
 	//Based on https://github.com/dizzib/earthcalc.
-	static double calculateTargetHiddenHeight(double eyeHeight, int targetDistance) {
+	public static double calculateTargetHiddenHeight(double eyeHeight, double targetDistance) {
 		final int EARTH_RADIUS_KM = 6371;
 		final double eyeHeightKm = eyeHeight * 0.001;
 		final double targetDistanceKm = targetDistance * 0.001;
