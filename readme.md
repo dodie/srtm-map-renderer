@@ -92,3 +92,21 @@ java -jar target/hgt-map-renderer-0.0.1-SNAPSHOT.jar "contour" "<path-to-hgt-dat
 ```
   
 ![Contour lines](https://github.com/dodie/hgt-map-renderer/blob/master/docs/contour.png "Contour lines")
+
+## Can-See Calculation
+
+The "cansee" command tells you if a point in the 3D space is visible from the viewpoint.
+The inputs are the two coordinates with height data: Viewpoint(lat, lon, height), WatchedPoint(lat, lon, height) in this order.
+
+In the following example we try to see a point at 500m above Pásztó from 500m above Verpelét unsuccessfully because Kékes blocks the view:
+```
+java -jar target/hgt-map-renderer-0.0.1-SNAPSHOT.jar "cansee" "<path-to-hgt-data>" "44" "16" "48" "22" "47.84907" "20.19078" "500" "47.91870" "19.70804" "500"
+```
+
+Int the next example the viewpoint is on the lookout tower in Kékes, and the target is the reservoir in Nagyréde.
+The point is visible.
+```
+java -jar target/hgt-map-renderer-0.0.1-SNAPSHOT.jar "cansee" "<path-to-hgt-data>" "44" "16" "48" "22" "47.87231" "20.00913" "1050" "47.78333" "19.83700" "200"
+```
+
+Warning! This method does not yet calculate with the Earth's curve. 

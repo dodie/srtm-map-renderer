@@ -9,6 +9,7 @@ import hu.awm.srtm.map.contour.ContourCalculator;
 import hu.awm.srtm.map.contour.ContourRenderer;
 import hu.awm.srtm.map.reliefmap.ReliefMapRenderer;
 import hu.awm.srtm.presentation.JFramePresenter;
+import hu.awm.srtm.tools.cansee.CanSeeCalculator;
 
 public class CliApplication {
 
@@ -19,11 +20,11 @@ public class CliApplication {
 
 		String type = args[0];
 		String hgtFiles = args[1];
-		Position coordinates = new Position(
-				Double.parseDouble(args[2]),
-				Double.parseDouble(args[3]));
 
 		if (type.equals("relief")) {
+			Position coordinates = new Position(
+					Double.parseDouble(args[2]),
+					Double.parseDouble(args[3]));
 			int fromLat = Integer.parseInt(args[4]);
 			int fromLon = Integer.parseInt(args[5]);
 			int toLat = Integer.parseInt(args[6]);
@@ -33,6 +34,9 @@ public class CliApplication {
 			TileMap tileMap = tileReader.readHgtFiles(fromLat, fromLon, toLat, toLon);
 			new JFramePresenter("Relief map", ReliefMapRenderer.render(tileMap, coordinates)).display();
 		} else if (type.equals("contour")) {
+			Position coordinates = new Position(
+					Double.parseDouble(args[2]),
+					Double.parseDouble(args[3]));
 			final double fromDeg = Double.parseDouble(args[4]);
 			final double toDeg = Double.parseDouble(args[5]);
 			final double resolution = Double.parseDouble(args[6]);
@@ -48,7 +52,31 @@ public class CliApplication {
 					ContourCalculator.getContours(tileMap, coordinates, fromDeg, toDeg, resolution);
 
 			new JFramePresenter("Contours", ContourRenderer.renderContours(contours)).display();
-		} else {
+		} else if (type.equals("cansee")) {
+			int tileFromLat = Integer.parseInt(args[2]);
+			int tileFromLon = Integer.parseInt(args[3]);
+			int tileToLat = Integer.parseInt(args[4]);
+			int tileToLon = Integer.parseInt(args[5]);
+
+			TileReader tileReader = new TileReader(hgtFiles);
+			TileMap tileMap = tileReader.readHgtFiles(tileFromLat, tileFromLon, tileToLat, tileToLon);
+
+			Double fromLat = Double.parseDouble(args[6]);
+			Double fromLon = Double.parseDouble(args[7]);
+			Double fromHeight = Double.parseDouble(args[8]);
+			Double toLat = Double.parseDouble(args[9]);
+			Double toLon = Double.parseDouble(args[10]);
+			Double toHeight = Double.parseDouble(args[11]);
+
+			CanSeeCalculator canSeeCalculator = new CanSeeCalculator();
+			canSeeCalculator.setTileMap(tileMap);
+			canSeeCalculator.setCoordinates(fromLat, fromLon, fromHeight, toLat, toLon, toHeight);
+			System.out.println(
+					canSeeCalculator.calculateBoolean()
+					? "Points are visible to each other."
+					: "Points aren't visible to each other.");
+		}
+		else {
 			throw new IllegalArgumentException("Unknown map type: " + type + ". Type should be one of the following: relief, contour.");
 		}
 
