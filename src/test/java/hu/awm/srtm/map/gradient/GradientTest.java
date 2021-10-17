@@ -4,15 +4,15 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.*;
 
-import hu.awm.srtm.helper.Gradient;
-import hu.awm.srtm.helper.LinearGradient;
+import hu.awm.srtm.helper.ColorScheme;
+import hu.awm.srtm.helper.RelativeLinearGradient;
 import org.junit.Test;
 
 public class GradientTest {
 
 	@Test
 	public void testTwoStepLinearGradient() {
-		Gradient gradient = new LinearGradient(Color.BLACK, Color.WHITE);
+		ColorScheme gradient = new RelativeLinearGradient(1.0, Color.BLACK, Color.WHITE);
 
 		assertEquals(Color.BLACK, gradient.heightToColor(0.0));
 		assertEquals(Color.WHITE, gradient.heightToColor(1.0));
@@ -21,7 +21,7 @@ public class GradientTest {
 
 	@Test
 	public void testThreeStepLinearGradient() {
-		Gradient gradient = new LinearGradient(Color.BLACK, Color.RED, Color.WHITE);
+		ColorScheme gradient = new RelativeLinearGradient(1.0, Color.BLACK, Color.RED, Color.WHITE);
 
 		assertEquals(Color.BLACK, gradient.heightToColor(0.0));
 		assertEquals(Color.WHITE, gradient.heightToColor(1.0));
