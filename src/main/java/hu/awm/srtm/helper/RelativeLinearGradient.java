@@ -8,9 +8,9 @@ import java.awt.*;
  */
 public class RelativeLinearGradient implements ColorScheme {
 
-	private Color[] colors;
-	private double[] stops;
-	private double max;
+	private final Color[] colors;
+	private final double[] stops;
+	private final double max;
 
 	public RelativeLinearGradient(double max, Color start, Color end) {
 		this.max = max;
