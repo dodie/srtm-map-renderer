@@ -1,4 +1,5 @@
 [![Master](https://github.com/dodie/srtm-map-renderer/actions/workflows/master.yml/badge.svg)](https://github.com/dodie/srtm-map-renderer/actions/workflows/master.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dodie_srtm-map-renderer&metric=alert_status)](https://sonarcloud.io/dashboard?id=dodie_srtm-map-renderer)
 
 # SRTM Map Renderer
 
