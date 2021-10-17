@@ -18,9 +18,12 @@ jobs:
           distribution: 'adopt'
           cache: maven
 
-      - name: Build and analyze
+      - name: Build
+        run: mvn -B package --file pom.xml
+
+      - name: Sonar Scan
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B package --file pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{
-          secrets.PROJECT_KEY}}
+        if: env.SONAR_TOKEN != null
+        run: mvn -B verify --file pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{secrets.PROJECT_KEY}}
