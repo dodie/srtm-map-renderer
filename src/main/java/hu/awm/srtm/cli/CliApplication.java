@@ -73,8 +73,8 @@ public class CliApplication {
 			canSeeCalculator.setCoordinates(fromLat, fromLon, fromHeight, toLat, toLon, toHeight);
 			System.out.println(
 					canSeeCalculator.calculateBoolean()
-					? "Points are visible to each other."
-					: "Points aren't visible to each other.");
+					? "Hurray! Points are visible to each other. :)"
+					: "Points aren't visible to each other. :(");
 		}
 		else {
 			throw new IllegalArgumentException("Unknown map type: " + type + ". Type should be one of the following: relief, contour.");

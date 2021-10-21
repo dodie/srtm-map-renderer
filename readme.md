@@ -103,10 +103,13 @@ In the following example we try to see a point at 500m above Pásztó from 500m 
 java -jar target/hgt-map-renderer-0.0.1-SNAPSHOT.jar "cansee" "<path-to-hgt-data>" "44" "16" "48" "22" "47.84907" "20.19078" "500" "47.91870" "19.70804" "500"
 ```
 
-Int the next example the viewpoint is on the lookout tower in Kékes, and the target is the reservoir in Nagyréde.
+In the next example the viewpoint is on the lookout tower in Kékes, and the target is the reservoir in Nagyréde.
 The point is visible.
 ```
 java -jar target/hgt-map-renderer-0.0.1-SNAPSHOT.jar "cansee" "<path-to-hgt-data>" "44" "16" "48" "22" "47.87231" "20.00913" "1050" "47.78333" "19.83700" "200"
 ```
 
-Warning! This method does not yet calculate with the Earth's curve. 
+The third example shows that not everything is visible from Kékes (the calculation counts in the earth's curvature), the target is Kiskunmajsa, which has the average height of 104m. 150 is given for the target point height. Sight is lost near Nyársapát:
+```
+java -jar target/hgt-map-renderer-0.0.1-SNAPSHOT.jar "cansee" "<path-to-hgt-data>" "44" "16" "48" "22" "47.87231" "20.00913" "1050" "46.49220" "19.74526" "150"
+```
