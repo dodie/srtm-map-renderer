@@ -10,6 +10,7 @@ import hu.awm.srtm.map.contour.ContourRenderer;
 import hu.awm.srtm.map.reliefmap.ReliefMapRenderer;
 import hu.awm.srtm.presentation.JFramePresenter;
 import hu.awm.srtm.tools.cansee.CanSeeCalculator;
+import hu.awm.srtm.tools.cansee.WGS84Geoid;
 
 public class CliApplication {
 
@@ -73,8 +74,8 @@ public class CliApplication {
 			canSeeCalculator.setCoordinates(fromLat, fromLon, fromHeight, toLat, toLon, toHeight);
 			System.out.println(
 					canSeeCalculator.calculateBoolean()
-					? "Hurray! Points are visible to each other. :)"
-					: "Points aren't visible to each other. :(");
+					? "Hurray! Given target point is visible from the viewpoint. :)"
+					: "Given target is not visible from the viewpoint. :(");
 		}
 		else {
 			throw new IllegalArgumentException("Unknown map type: " + type + ". Type should be one of the following: relief, contour.");

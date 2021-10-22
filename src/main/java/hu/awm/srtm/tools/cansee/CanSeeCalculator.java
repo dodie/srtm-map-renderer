@@ -11,15 +11,16 @@ public class CanSeeCalculator {
     private SphericalCoordinates from;
     private SphericalCoordinates to;
     private TileMap tileMap;
+    private WGS84Geoid geoid;
 
     public CanSeeCalculator() {
-
+        this.geoid = new WGS84Geoid();
     }
 
     public void setCoordinates(Double fromLat, Double fromLon, Double fromHeight, Double toLat, Double toLon, Double toHeight) {
-        double fromGeoidOffset = WGS84Geoid.getGeoidRadiusAt(fromLat);
+        double fromGeoidOffset = geoid.getGeoidRadiusAt(fromLat, fromLon);
         this.from = new SphericalCoordinates(fromHeight + fromGeoidOffset, Math.toRadians(fromLon), Math.toRadians(90.0 - fromLat));
-        double toGeoidOffset = WGS84Geoid.getGeoidRadiusAt(toLat);
+        double toGeoidOffset = geoid.getGeoidRadiusAt(toLat, toLon);
         this.to = new SphericalCoordinates(toHeight + toGeoidOffset, Math.toRadians(toLon), Math.toRadians(90.0 - toLat));
     }
 
@@ -30,9 +31,11 @@ public class CanSeeCalculator {
     public Sight calculateSight() {
         SphericalCoordinates loseSightCoordinate = null;
         Vector3D directionVector = this.to.getCartesian().subtract(this.from.getCartesian());
-        System.out.println("Direction vector length: " + directionVector.distance(Vector3D.ZERO));
-        double stepCount = Math.max(Math.abs(to.getTheta() - from.getTheta()),
-                Math.abs(to.getPhi() - from.getPhi())) * Tile.RESOLUTION * EXAMINATION_NUMBER_IN_ARCSEC;
+        double distance = directionVector.distance(Vector3D.ZERO);
+        System.out.println(String.format("Direction vector length: %f", distance));
+        double stepCount = Math.max(Math.abs(Math.toDegrees(to.getTheta() - from.getTheta())),
+                Math.abs(Math.toDegrees(to.getPhi() - from.getPhi()))) * Tile.RESOLUTION * EXAMINATION_NUMBER_IN_ARCSEC;
+        System.out.println(String.format("Max step count: %f", stepCount));
         Vector3D stepVector = directionVector.scalarMultiply(1 / stepCount);
         double stepVectorLength = stepVector.distance(Vector3D.ZERO);
 
@@ -53,7 +56,7 @@ public class CanSeeCalculator {
             double loseSightLat = 90.0 - Math.toDegrees(loseSightCoordinate.getPhi());
             double loseSightLon = Math.toDegrees(loseSightCoordinate.getTheta());
             System.out.println("Sight is lost at: latitude: " + loseSightLat + " longitude: " + loseSightLon
-                    + " height: " + (loseSightCoordinate.getR() - WGS84Geoid.getGeoidRadiusAt(loseSightLat)));
+                    + " height: " + (loseSightCoordinate.getR() - geoid.getGeoidRadiusAt(loseSightLat, loseSightLon)));
         }
         return new Sight(from, to, loseSightCoordinate);
     }
@@ -70,6 +73,6 @@ public class CanSeeCalculator {
         int tileLon = (int)lon;
         Tile tile = tileMap.getByLatLon(tileLat, tileLon);
         double height = tile.elevationByExactCoordinates(lat, lon);
-        return height + WGS84Geoid.getGeoidRadiusAt(lat) <= pointToCheck.getR();
+        return height + geoid.getGeoidRadiusAt(lat, lon) <= pointToCheck.getR();
     }
 }
