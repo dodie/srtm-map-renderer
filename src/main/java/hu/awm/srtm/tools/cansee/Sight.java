@@ -1,40 +1,42 @@
 package hu.awm.srtm.tools.cansee;
 
+import org.apache.commons.math3.geometry.euclidean.threed.SphericalCoordinates;
+
 public class Sight {
-    private Vector3D startCoordinate;
-    private Vector3D endCoordinate;
-    private Vector3D looseSightCoordinate;
+    private SphericalCoordinates startCoordinate;
+    private SphericalCoordinates endCoordinate;
+    private SphericalCoordinates looseSightCoordinate;
 
     public Sight() {
     }
 
-    public Sight(Vector3D startCoordinate, Vector3D endCoordinate, Vector3D looseSightCoordinate) {
+    public Sight(SphericalCoordinates startCoordinate, SphericalCoordinates endCoordinate, SphericalCoordinates looseSightCoordinate) {
         this.startCoordinate = startCoordinate;
         this.endCoordinate = endCoordinate;
         this.looseSightCoordinate = looseSightCoordinate;
     }
 
-    public Vector3D getStartCoordinate() {
+    public SphericalCoordinates getStartCoordinate() {
         return startCoordinate;
     }
 
-    public void setStartCoordinate(Vector3D startCoordinate) {
+    public void setStartCoordinate(SphericalCoordinates startCoordinate) {
         this.startCoordinate = startCoordinate;
     }
 
-    public Vector3D getEndCoordinate() {
+    public SphericalCoordinates getEndCoordinate() {
         return endCoordinate;
     }
 
-    public void setEndCoordinate(Vector3D endCoordinate) {
+    public void setEndCoordinate(SphericalCoordinates endCoordinate) {
         this.endCoordinate = endCoordinate;
     }
 
-    public Vector3D getLooseSightCoordinate() {
+    public SphericalCoordinates getLooseSightCoordinate() {
         return looseSightCoordinate;
     }
 
-    public void setLooseSightCoordinate(Vector3D looseSightCoordinate) {
+    public void setLooseSightCoordinate(SphericalCoordinates looseSightCoordinate) {
         this.looseSightCoordinate = looseSightCoordinate;
     }
 
